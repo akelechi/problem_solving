@@ -14,16 +14,26 @@ import sys
 #
 
 def pickingNumbers(a):
-    countOfSubArray = 0
+    countOfSubArray = 1
     maxCount = 0
+    pivot = a[0]
+    pivotPosition = 0
     a = sorted(a)
     for i in range(1, len(a)):
-        if a[i]-a[i-1]<2:
+        if a[i]-pivot<2:
             countOfSubArray +=1
+            if (i == len(a)-1) & (countOfSubArray > maxCount):
+                maxCount = countOfSubArray
         else:
             if countOfSubArray > maxCount:
                 maxCount = countOfSubArray
-            countOfSubArray = 0
+                for j in range(pivotPosition, i+1):
+                    if a[i]-a[i-j] >2:
+                        pivotPosition = i-j
+                        countOfSubArray = 1+j
+                        break
+            pivot = a[pivotPosition]
+        
     return maxCount
         
         
