@@ -18,11 +18,14 @@ import sys
 #
 
 def kangaroo(x1, v1, x2, v2):
-    if (x2-x1)% math.gcd(v1, -v2) == 0:
-        return 'YES'
+    if ((x1<x2) & (v1<=v2))| ((x1>x2) & (v1>=v2)):
+        return "NO"
+    
+    if ((x1-x2)/(v2-v1) >0) & ((x1-x2)% (v2-v1) == 0):
+        return "YES"
     else:
-        return 'NO'
-
+        print('condition 3')
+        return "NO"
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
